@@ -1,0 +1,32 @@
+plugins {
+    id 'java'
+}
+
+group 'debezium'
+version '1.0-SNAPSHOT'
+
+ext {
+    confluentVersion = '7.5.3'
+}
+
+dependencies {
+    implementation "io.confluent:kafka-connect-avro-converter:${confluentVersion}"
+    implementation "io.confluent:kafka-connect-avro-data:${confluentVersion}"
+    implementation "io.confluent:kafka-avro-serializer:${confluentVersion}"
+    implementation "io.confluent:kafka-schema-serializer:${confluentVersion}"
+    implementation "io.confluent:kafka-schema-registry-client:${confluentVersion}"
+    implementation "io.confluent:common-config:${confluentVersion}"
+    implementation "io.confluent:common-utils:${confluentVersion}"
+}
+
+task downloadDependencies(type: Sync) {
+    from configurations.runtimeClasspath
+    into "$buildDir/downloaded"
+}
+
+repositories {
+    maven {
+        url 'https://packages.confluent.io/maven/'
+    }
+    mavenCentral()
+}

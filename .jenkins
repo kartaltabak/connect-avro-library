@@ -1,0 +1,9 @@
+//noinspection GroovyUnusedAssignment
+@Library('github-jenkins-pipeline') _
+
+dockerBuildPipeline(
+        mainBranchCron: '@monthly',
+        imageBuilder: [
+                registryRepoName: 'kartaltabak/docker-connect-avro-library'
+        ]
+)
