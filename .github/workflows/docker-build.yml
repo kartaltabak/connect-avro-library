@@ -28,7 +28,7 @@ jobs:
       - name: Build and push Docker image with timestamp
         uses: docker/build-push-action@v5
         with:
-          context: ./docker # Path to your Docker context folder
+          context: ./docker
           push: true
           tags: |
             kartaltabak/docker-connect-avro-library:${{ env.DATE_TAG }}
