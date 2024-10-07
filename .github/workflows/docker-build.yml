@@ -21,11 +21,15 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
+      - name: Set up date for tagging
+        id: date_tag
+        run: echo "DATE_TAG=$(date +'%Y%m%d')" >> $GITHUB_ENV
+
       - name: Build and push Docker image with timestamp
         uses: docker/build-push-action@v5
         with:
           context: ./docker # Path to your Docker context folder
           push: true
           tags: |
-            kartaltabak/docker-connect-avro-library:$(date +'%Y%m%d')
+            kartaltabak/docker-connect-avro-library:${{ env.DATE_TAG }}
             kartaltabak/docker-connect-avro-library:latest
